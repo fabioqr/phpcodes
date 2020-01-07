@@ -1,0 +1,51 @@
+.calendario{
+    margin: 2%;
+    max-width: 300px;
+    background: whitesmoke;
+    padding: 1%;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+}
+#tb_calendario{
+    background: #ddd;
+    color: #555;
+    border-radius: 2px 2px 2px 2px;
+}
+#tb_calendario .mes{
+    display: none;
+}
+#tb_calendario td{
+    padding: 1%;
+}
+#tb_calendario .mes_title{
+    font-size: 22px;
+    color: white;
+}
+#tb_calendario .mes_title td{
+    background: #333;
+    border-radius: 3px 3px 1px 1px;
+}
+.calendario #volta, .calendario #vai{
+    padding: 1% 2%;
+    font-size: 19.5px;
+    text-decoration: none;
+    background: linear-gradient(to bottom, #fff, #ccc 130%);
+    border: 1px solid #ccc;
+    margin: 0 0.5%;
+    position: absolute;
+}
+.calendario #volta:hover, .calendario #vai:hover{
+    background: linear-gradient(to bottom, #ccc, #fff 130%);
+}
+.calendario #volta:active, .calendario #vai:active{
+    background: #f5f5f5;
+}
+.calendario #volta{
+    left: 3.7%;
+    border-radius: 3px 1px 1px 1px;
+}
+.calendario #vai{
+    right: 4%;
+    border-radius: 1px 3px 1px 1px;
+}
