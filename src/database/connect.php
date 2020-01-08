@@ -48,7 +48,7 @@ class connect {
     private function connect(){
         try
         {
-            $this->conexao = new PDO($this->getDBType().":host=".$this->getHost().";port=".$this->getPort().";dbname=".$this->getDB(), $this->getUser(), $this->getPassword());
+            $this->conexao = new PDO($this->getDBType().":host=".$this->getHost().";port=".$this->getPort()."; dbname=".$this->getDB(), $this->getUser(), $this->getPassword(), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         }
         catch (PDOException $i)
         {

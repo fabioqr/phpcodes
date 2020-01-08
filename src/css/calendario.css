@@ -49,3 +49,12 @@
     right: 4%;
     border-radius: 1px 3px 1px 1px;
 }
+ #datanow{
+    font-weight: bold;
+}
+
+.calendario #tb_calendario td a{
+    color: darkgreen;
+    font-weight: bolder;
+    text-decoration: none;
+}

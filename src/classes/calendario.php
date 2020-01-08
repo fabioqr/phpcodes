@@ -18,7 +18,13 @@ class calendario extends \src\database\connect {
         return $diasMeses;
     }
 
+    private function nun($nun) {
+        return ($nun < 10) ? '0' . $nun : $nun;
+    }
+
     public function criarCalendario() {
+
+        $eventos = $this->executarExbirTodosEventosFuturosRenomeados();
 
         $daysWeek = array(
             'Sun',
@@ -72,7 +78,7 @@ class calendario extends \src\database\connect {
         echo '<a href="#" id="vai">&raquo</a>';
         echo '<table border="0" width=100% id=tb_calendario>';
         foreach ($arrayMes as $num => $mes) {
-            echo '<tbody id=mes_' . $num . ' class="mes">';
+            echo '<tbody id="mes_' . $num . '" class="mes">';
             echo '<tr class="mes_title"><td colspan=7>' . $mes . '</td></tr> <tr class="dias_title">';
             foreach ($diasSemanas as $i => $day) {
                 echo '<td>' . $day . '</td>';
@@ -88,7 +94,21 @@ class calendario extends \src\database\connect {
                         $y += 1;
                     }
                 }
-                echo '<td>' . $numero . '</td>';
+                if (count($eventos) > 0) {
+                    $dayNow = $this->nun($numero);
+                    $monthNow = $this->nun($num);
+                    $yearNow = date("Y");
+                    $date = $yearNow . '-' . $monthNow . '-' . $dayNow;
+
+                    if (in_array($date, array_keys($eventos))) {
+                        echo '<td><a href="#" id="linkeventos">' . $numero . '</a></td>';
+                    } else {
+                        echo '<td id="dia_' . $numero . '">' . $numero . '</td>';
+                    }
+                } else {
+                    echo '<td id="dia_' . $numero . '">' . $numero . '</td>';
+                }
+
                 if ($y == 7) {
                     $y = 0;
                     echo '</tr><tr>';
@@ -115,13 +135,42 @@ class calendario extends \src\database\connect {
     }
 
     private function exbirTodosEventos() {
-        $select = "SELECT * FROM eventos";
+        $dia = date("Y-m-d");
+        $select = 'SELECT * FROM eventos';
 
         return $this->selectDB($select);
     }
 
     public function executarExbirTodosEventos() {
         return $this->exbirTodosEventos();
+    }
+
+    private function exbirTodosEventosFuturos() {
+        $dia = date("Y-m-d");
+        $select = 'SELECT * FROM eventos WHERE dia >= "' . $dia . '"';
+
+        return $this->selectDB($select);
+    }
+
+    public function executarExbirTodosEventosFuturos() {
+        return $this->exbirTodosEventosFuturos();
+    }
+
+    public function executarExbirTodosEventosFuturosRenomeados() {
+        $r = $this->exbirTodosEventosFuturos();
+        $re = array();
+        foreach ($r as $y) {
+            $dt = $y->dia;
+            $ti = $y->titulo;
+            $de = $y->descricao;
+            $re [$dt] = array(
+                'titulo' => $ti,
+                'data' => $dt,
+                'descricao' => $de
+            );
+        }
+
+        return $re;
     }
 
 }
