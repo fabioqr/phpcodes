@@ -1,11 +1,11 @@
 {
     "autoload": {
-       "classmap": [
-      "src/"
-          ]
+        "classmap": [
+            "database",
+            "classes"
+        ]
     },
     "require": {
         "components/jquery": "3.*"
-    }
-     
+           }
 }
