@@ -9,12 +9,15 @@ foreach ($re AS $data) {
     $ID = $data->ID;
     $titulo = $data->Titulo;
     $Color = $data->Color;
+    if($data->diainteiro == TRUE){
     $Inicio = date("Y-m-d", strtotime($data->Inicio));
-    if (isset($data->Termino)) {
-        $Termino = date("Y-m-d", strtotime($data->Termino));
+    $Termino = date("Y-m-d", strtotime($data->Termino));    
     } else {
-        $Termino = $data->Termino;
+    $Inicio = date("Y-m-d", strtotime($data->Inicio)).'T'.date("H:i:s", strtotime($data->Inicio));
+    $Termino = date("Y-m-d", strtotime($data->Termino)).'T'.date("H:i:s", strtotime($data->Termino));    
     }
+    
+
     $events [] = [
         'id' => $ID,
         'title' => $titulo,

@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridDay,listWeek'
+            right: 'dayGridMonth,timeGridWeek'
         },
         defaultView: 'dayGridMonth',
         // defaultDate: '2019-08-12',
         navLinks: true, // can click day/week names to navigate views
         editable: true,
-        eventLimit: true, // allow "more" link when too many events
+        eventLimit: false, // allow "more" link when too many events
         locale: 'pt-br', // allow "more" link when too many events
 
         eventSources: [
